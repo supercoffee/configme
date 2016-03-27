@@ -7,6 +7,7 @@ inside a directory named `templates`. (Support for custom template directories c
 
 Run `configme example.yml` to generate all config files using variables in the `yml` file.
 
+See `example` folder for more project structure and sample use cases.
 
 # Installation
 
@@ -14,7 +15,7 @@ Run `configme example.yml` to generate all config files using variables in the `
 
 # Usage
 ```
-usage: configme [-h] [-o PROJECTPATH] [-f] config
+usage: configme [-h] [-o PROJECTPATH] [-t TEMPLATEPATH] [-f] config
 
 positional arguments:
   config                Configuration file in YAML format to load template
@@ -24,7 +25,9 @@ optional arguments:
   -h, --help            show this help message and exit
   -o PROJECTPATH, --projectpath PROJECTPATH
                         Project root path. All templates will be output
-                        relative to this.
+                        relative to this. Defaults to current directory
+  -t TEMPLATEPATH, --templatepath TEMPLATEPATH
+                        Path to templates directory. Defaults to ./templates
   -f, --force           Force overwrite files that already exist.
 
 ```

@@ -9,7 +9,15 @@ import yaml
 import argparse
 
 DEFAULT_EXTENSION = '.j2'
-DEFAULT_TEMPLATE_PATH = 'templates'
+DEFAULT_TEMPLATE_PATH = './templates'
+HELP_PROJECTPATH = """
+Project root path. All templates will be output relative to this.
+Defaults to current directory
+"""
+HELP_TEMPLATEPATH = """
+Path to templates directory.
+Defaults to ./templates
+"""
 USAGE = 'Usage: python configme.py deploy <environment>'
 
 
@@ -21,17 +29,15 @@ def load_config(filename):
         raise Exception(colored('Config file {} does not exist'.format(filename), 'red'))
 
 
-def get_template_path(template_path=''):
-    if path.isabs(template_path):
-        return template_path
-    if not template_path:
-        template_path = path.join(getcwd(), DEFAULT_TEMPLATE_PATH)
+def resolve_dir(patharg=''):
+    if path.isabs(patharg):
+        return patharg
     else:
-        template_path = path.join(getcwd(), template_path)
+        patharg = path.join(getcwd(), patharg)
 
-    if not path.exists(template_path):
-        raise Exception(colored('Template path does not exist', 'red'))
-    return template_path
+    if not path.exists(patharg):
+        raise argparse.ArgumentTypeError(colored('Path {} does not exist'.format(patharg), 'red'))
+    return patharg
 
 def load_filters():
     """
@@ -93,7 +99,10 @@ def make_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('config', help='Configuration file in YAML format to load template variables from')
     parser.add_argument('-o', '--projectpath',
-                        help='Project root path. All templates will be output relative to this.', default=getcwd())
+                        help=HELP_PROJECTPATH, default=getcwd(),
+                        type=resolve_dir)
+    parser.add_argument('-t', '--templatepath', help=HELP_TEMPLATEPATH, default=DEFAULT_TEMPLATE_PATH,
+                        type=resolve_dir)
     parser.add_argument('-f', '--force',
                         help='Force overwrite files that already exist.', action='store_true', default=False)
     return parser.parse_args()
@@ -101,7 +110,7 @@ def make_args():
 def main():
     args = make_args()
     config = load_config(args.config)
-    template_env = get_template_environment(get_template_path(DEFAULT_TEMPLATE_PATH), load_filters())
+    template_env = get_template_environment(args.templatepath, load_filters())
     cfg_manager = ConfigMe(config, args.projectpath, args.force, template_env)
     try:
         cfg_manager.deploy()
