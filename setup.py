@@ -2,6 +2,8 @@
 from configme import __version__, __author__
 from setuptools import setup
 
+# http://stackoverflow.com/questions/6947988/when-to-use-pip-requirements-file-versus-install-requires-in-setup-py
+REQUIREMENTS = [i.strip() for i in open("requirements.txt").readlines()]
 setup(
     name = 'configme',
     version = __version__,
@@ -15,6 +17,7 @@ setup(
     ],
     keywords = 'cli',
     packages = ['configme'],
+    install_requires=REQUIREMENTS,
     entry_points = {
         'console_scripts': [
             'configme=configme.__main__:main',
