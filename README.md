@@ -1,11 +1,14 @@
 # Configme
 #### One config file to rule them all
 
-Create one YAML config file for each environment, and use it to template all your project config files.
-Mirror your project directory structure for each config file you need to generate, and place this structure
-inside a directory named `templates`. (Support for custom template directories coming soon).
+1. Create one YAML config file for each environment. This holds all the variables to template the config files.
+2. Create a `templates` directory and make Jinja2 templates for each config file you want to generate
+3. Run `configme myconfig.yml` to generate all config files using variables in the `myconfig.yml` file. Configme
+will automatically populate your project with the generated configs.
 
-Run `configme example.yml` to generate all config files using variables in the `yml` file.
+The directory structure of your `templates` directory should mirror the relative path of the final config file.
+If you want to make a config file `app/config/database.php`,
+you should have a `app/config/database.php.j2` file in your `templates` directory.
 
 See `example` folder for more project structure and sample use cases.
 
@@ -44,6 +47,10 @@ source env/bin/activate
 
 # install pip requirements 
 pip install -e .
+
+# generate configs in example project
+cd example
+configme -f dev.yml
 
 ```
 
