@@ -1,4 +1,5 @@
 # https://github.com/rdegges/skele-cli/blob/master/setup.py
+from configme import __version__
 from setuptools import find_packages, setup
 
 # http://stackoverflow.com/questions/6947988/when-to-use-pip-requirements-file-versus-install-requires-in-setup-py
@@ -11,7 +12,7 @@ REQUIREMENTS = [
 
 setup(
     name = 'configme',
-    version = '0.0.3',
+    version = __version__,
     description = 'A template based config file generator for general purposes.',
     author = 'Benjamin Daschel',
     author_email = 'coffeemaxed@gmail.com',

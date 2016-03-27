@@ -1,5 +1,6 @@
 __author__ = 'ben'
 
+from . import __version__
 from . import filters
 import inspect
 from jinja2 import Environment, FileSystemLoader, Template
@@ -96,7 +97,7 @@ def make_args():
     """
     :return: argparse.Namespace
     """
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(version=__version__)
     parser.add_argument('config', help='Configuration file in YAML format to load template variables from')
     parser.add_argument('-o', '--projectpath',
                         help=HELP_PROJECTPATH, default=getcwd(),
