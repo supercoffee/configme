@@ -11,7 +11,7 @@ REQUIREMENTS = [
 
 setup(
     name = 'configme',
-    version = '0.0.2',
+    version = '0.0.3',
     description = 'A template based config file generator for general purposes.',
     author = 'Benjamin Daschel',
     author_email = 'coffeemaxed@gmail.com',
