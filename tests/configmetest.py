@@ -1,6 +1,6 @@
 __author__ = 'ben'
 
-import configme
+from configme import configme
 import unittest
 from os import path
 

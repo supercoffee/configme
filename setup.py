@@ -1,14 +1,19 @@
 # https://github.com/rdegges/skele-cli/blob/master/setup.py
-from configme import __version__, __author__
 from setuptools import setup
 
 # http://stackoverflow.com/questions/6947988/when-to-use-pip-requirements-file-versus-install-requires-in-setup-py
-REQUIREMENTS = [i.strip() for i in open("requirements.txt").readlines()]
+REQUIREMENTS = [
+    'Jinja2',
+    'MarkupSafe',
+    'PyYAML',
+    'termcolor'
+]
+
 setup(
     name = 'configme',
-    version = __version__,
+    version = '0.0.2',
     description = 'A template based config file generator for general purposes.',
-    author = __author__,
+    author = 'Benjamin Daschel',
     author_email = 'coffeemaxed@gmail.com',
     license = 'UNLICENSE',
     classifiers = [
