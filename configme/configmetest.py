@@ -1,7 +1,7 @@
 __author__ = 'ben'
 
-import unittest
 import configme
+import unittest
 from os import path
 
 class MyTestCase(unittest.TestCase):

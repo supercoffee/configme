@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 __author__ = 'ben'
 
 from jinja2 import Environment, FileSystemLoader, Template
@@ -79,19 +78,3 @@ def make_args():
     parser.add_argument('-o', '--projectpath',
                         help='Project root path. All templates will be output relative to this.', default=getcwd())
     return parser.parse_args()
-
-
-def main():
-    args = make_args()
-    config = load_config(args['config'])
-    cfg_manager = ConfigMe(config, args['projectpath'])
-    method = getattr(cfg_manager, args['command'])
-    try:
-        if method is not None:
-            method()
-    except Exception as e:
-        print e
-
-
-if __name__ == "__main__":
-    main()

@@ -15,5 +15,9 @@ setup(
     ],
     keywords = 'cli',
     packages = ['configme'],
-    scripts=['configme/configme']
+    entry_points = {
+        'console_scripts': [
+            'configme=configme.__main__:main',
+    ],
+},
 )
