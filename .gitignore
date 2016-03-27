@@ -1,5 +1,4 @@
 env/
 *.pyc
 configme.egg-info
-example
 dist

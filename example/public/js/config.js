@@ -1,0 +1,1 @@
+var config = {"facebook": {"appid": "123456789"}};
