@@ -34,9 +34,10 @@ def get_template_path(template_path=''):
 
 class ConfigMe():
 
-    def __init__(self, template_vars, project_path):
+    def __init__(self, template_vars, project_path, force_update):
         self.template_vars = template_vars
         self.project_path = project_path
+        self.force_update = force_update
 
     def _create_output_path(self, output_path):
         """
@@ -54,7 +55,7 @@ class ConfigMe():
         :return:
         """
         output_path = path.join(self.project_path, rel_path)
-        if path.exists(output_path):
+        if path.exists(output_path) and not self.force_update:
             print colored('Skipping file; File already exists: {}'.format(output_path), 'yellow')
             return
         self._create_output_path(output_path)
@@ -80,4 +81,6 @@ def make_args():
     parser.add_argument('config', help='Configuration file in YAML format to load template variables from')
     parser.add_argument('-o', '--projectpath',
                         help='Project root path. All templates will be output relative to this.', default=getcwd())
+    parser.add_argument('-f', '--force',
+                        help='Force overwrite files that already exist.', action='store_true', default=False)
     return parser.parse_args()
