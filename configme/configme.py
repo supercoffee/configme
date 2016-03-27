@@ -55,7 +55,7 @@ class ConfigMe():
         """
         output_path = path.join(self.project_path, rel_path)
         if path.exists(output_path):
-            print colored('Skipping file; File already exists: {}'.format(path), 'yellow')
+            print colored('Skipping file; File already exists: {}'.format(output_path), 'yellow')
             return
         self._create_output_path(output_path)
         with open(output_path, 'w') as outfile:
@@ -72,6 +72,9 @@ class ConfigMe():
 
 
 def make_args():
+    """
+    :return: argparse.Namespace
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument('command', choices=['deploy'])
     parser.add_argument('config', help='Configuration file in YAML format to load template variables from')
