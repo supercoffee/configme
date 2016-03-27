@@ -15,6 +15,7 @@ setup(
     description = 'A template based config file generator for general purposes.',
     author = 'Benjamin Daschel',
     author_email = 'coffeemaxed@gmail.com',
+    url='https://github.com/supercoffee/configme',
     license = 'UNLICENSE',
     classifiers = [
         'Intended Audience :: Developers',
